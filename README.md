@@ -5,7 +5,6 @@ This is a base app structure to bootstrap your Go + Iris web development.
 ## What you get
 
 * One controller
-* A built in working websocket
 * Basic partials
 * Basic logger
 * MVC-inspired folder structure
