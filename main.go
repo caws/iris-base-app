@@ -3,8 +3,8 @@ package main
 import (
 	"github.com/kataras/iris"
 	"github.com/kataras/iris/mvc"
+	"iris-base-app/controllers"
 	"os"
-	"go-clock/controllers"
 )
 
 func main() {

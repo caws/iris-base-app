@@ -1,12 +1,10 @@
 package controllers
 
 import (
-	"github.com/kataras/iris/sessions"
-	"github.com/kataras/iris/mvc"
 	"github.com/kataras/iris"
-	"html/template"
-	"go-clock/model"
-	"go-clock/utils"
+	"github.com/kataras/iris/mvc"
+	"github.com/kataras/iris/sessions"
+	"iris-base-app/utils"
 )
 
 func MainCtrl(app *mvc.Application) {
@@ -35,10 +33,6 @@ type mainController struct {
 
 func (m *mainController) BeforeActivation(b mvc.BeforeActivation) {
 	b.Handle("GET", "/", "Index")
-	b.Handle("GET", "/enroll_user", "EnrollUser")
-	b.Handle("GET", "/register_user_fingerprint/{user_id}", "RegisterUserFingerprint")
-	b.Handle("GET", "/clock_in_or_out", "ClockInOrOut")
-	b.Handle("GET", "/websocket_test", "WebSocketTest")
 }
 
 func (m *mainController) AfterActivation(a mvc.AfterActivation) {
@@ -48,27 +42,5 @@ func (m *mainController) AfterActivation(a mvc.AfterActivation) {
 }
 
 func (m *mainController) Index(ctx iris.Context) {
-	ctx.View("main/index.html")
-}
-
-func (m *mainController) EnrollUser(ctx iris.Context) {
-	usersInGroups, _ := model.Usuario{}.GetUsersFromLicencaInGroups()
-	ctx.ViewData("usersInGroups", usersInGroups)
-	ctx.View("main/enroll_user.html")
-}
-
-func (m *mainController) RegisterUserFingerprint(ctx iris.Context) {
-	user, _ := model.Usuario{}.ReturnUserById(ctx.Params().Get("user_id"))
-	ctx.ViewData("user", user)
-	userPhoto := template.URL(user.Foto)
-	ctx.ViewData("userPhoto", userPhoto)
-	ctx.View("main/register_user_fingerprint.html")
-}
-
-func (m *mainController) ClockInOrOut(ctx iris.Context) {
-	ctx.View("main/clock_in_or_out.html")
-}
-
-func (m *mainController) WebSocketTest(ctx iris.Context) {
 	ctx.View("main/index.html")
 }
